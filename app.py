@@ -19,7 +19,7 @@ def addrec():
 
             # print(Name, Address, Phone_Number, Password)
 
-            with sql.connect('Uber.db') as con:
+            with sql.connect('RideShare.db') as con:
                 print('entered')
                 cur = con.cursor()
                 cur.execute('INSERT INTO Customer (Name, Cur_address, Phone_number, Password) VALUES (?,?,?,?)',
