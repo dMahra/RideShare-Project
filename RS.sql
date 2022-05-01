@@ -17,6 +17,7 @@ CREATE TABLE "Customer" (
 CREATE TABLE "Driver" (
 	"Drive_id"	INTEGER NOT NULL,
 	"Name"	TEXT NOT NULL,
+	"Birthday" TEXT,
 	"Phone_number"	INTEGER NOT NULL,
 	"Password"	TEXT NOT NULL,
 	"Car_id"	INTEGER NOT NULL,
