@@ -1,6 +1,7 @@
 <html>
     <body>
-        <p><a href="{{ url_for('driverlogin') }}">Already a Driver? </a></p>
+        <p><a href="{{ url_for('driverlogin') }}">Deactivate Driver Account? </a></p>
+        <p><a href="{{ url_for('driverupdate') }}">Change Driver Password? </a></p>
     <div>
         <form action = "{{ url_for('adddriver')}}" method="POST">
             <h1> New Driver Information </h1>

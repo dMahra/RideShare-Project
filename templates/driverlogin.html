@@ -1,23 +1,16 @@
 <html>
-  <head>
-    <title>Flask Intro - login page</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="static/bootstrap.min.css" rel="stylesheet" media="screen">
-  </head>
-  <body>
-    <div class="container">
-      <h1>Driver login</h1>
-      <br>
-      <form action="" method="post">
-        <input type="text" placeholder="DriverID" name="DriverID" value="{{
-          request.form.CustomerID }}">
-         <input type="password" placeholder="Password" name="password" value="{{
-          request.form.password }}">
-        <input class="btn btn-default" type="submit" value="Login">
-      </form>
-      {% if error %}
-        <p class="error"><strong>Error:</strong> {{ error }}
-      {% endif %}
-    </div>
-  </body>
-</html>
+    <body>
+    <div>
+        <form action = "{{ url_for('driverlogin')}}" method="POST">
+            <h1> Delete Driver </h1>
+            Drive_id<br>
+            <input type = "text" name = "Drive_id" /></br>
+
+            Password<br>
+            <input type = "text" name = "password" /></br>
+
+            <input type = "Submit" value = "Delete" /> <br>
+        </form>
+    </div>>
+    </body>>
+</html>>

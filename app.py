@@ -47,25 +47,50 @@ def addrec():
             return render_template("results.html", msg=message)
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login', methods=['POST','GET'])
 def login():
     error = None
+    print(request.method)
     if request.method == 'POST':
-        if request.form['CustomerID'] != 'admin' or request.form['password'] != 'admin':
-            error = 'Invalid Credentials. Please try again.'
-        else:
-            return redirect(url_for('home'))
-    return render_template('login.html', error=error)
+        try:
+            # print(request.form['Customer_id'])
+
+            with sql.connect('RideShare.db') as con:
+                cur = con.cursor()
+                quotes = '"'
+                sqltemp = "DELETE from Customer WHERE Password =" + quotes + str(request.form['password']) + quotes + "and Customer_id =" + request.form['Customer_id']
+                cur.execute(sqltemp)
+                message = "successfully removed new Customer with id: " + str(request.form['Customer_id'])
+
+
+        except Exception as e:
+            print(e)
+            con.rollback()
+            message = "error in operation"  # + str(Customer_id)
+
+        finally:
+            con.close()
+            return render_template("results.html", msg=message)
+    else:
+        try:
+            print(request.form)
+            with sql.connect('RideShare.db') as con:
+                print('entered')
+                cur = con.cursor()
+                print(request)
+        except Exception as e:
+            print(e)
+            con.rollback()
+            message = "error in operation"  # + str(Customer_id)
+        finally:
+            con.close()
+            return render_template("login.html")
+
 
 
 @app.route('/driver')
 def new_driver():
     return render_template('driver.html')
-
-# remove driver method
-@app.route('/adddriver', methods=['POST', 'GET'])
-def removedriver():
-    print(request.method)
 
 
 
@@ -112,14 +137,118 @@ def adddriver():
 @app.route('/driverlogin', methods=['GET', 'POST'])
 def driverlogin():
     error = None
+    print(request.method)
     if request.method == 'POST':
-        if request.form['DriverID'] != 'admin' or request.form['password'] != 'admin':
-            error = 'Invalid Credentials. Please try again.'
-        else:
-            return redirect(url_for('home'))
-    return render_template('driverlogin.html', error=error)
+        try:
+            # print(request.form['Customer_id'])
 
+            with sql.connect('RideShare.db') as con:
+                print('entered')
+                cur = con.cursor()
+                quotes = '"'
+                sqltemp = "DELETE from Driver WHERE Password =" + quotes + str(request.form['password']) + quotes + "and Drive_id =" + request.form['Drive_id']
+                cur.execute(sqltemp)
+                message = "successfully removed new Driver with id: " + str(request.form['Drive_id'])
+                print(message)
+        except Exception as e:
+            print(e)
+            con.rollback()
+            message = "error in operation"  # + str(Customer_id)
 
+        finally:
+            con.close()
+            return render_template("results.html", msg=message)
+    else:
+        try:
+            print(request.form)
+            with sql.connect('RideShare.db') as con:
+                print('entered')
+                cur = con.cursor()
+                print(request)
+        except Exception as e:
+            print(e)
+            con.rollback()
+            message = "error in operation"  # + str(Customer_id)
+
+        finally:
+            con.close()
+            return render_template("driverlogin.html")
+
+@app.route('/driverupdate', methods=['GET', 'POST'])
+def driverupdate():
+    error = None
+    print(request.method)
+    if request.method == 'POST':
+        try:
+            with sql.connect('RideShare.db') as con:
+                print('entered')
+                cur = con.cursor()
+                quotes = '"'
+                sqltemp = "UPDATE Driver SET Password =" + quotes + str(request.form['newpassword']) + quotes + "WHERE Drive_id =" + request.form['Drive_id'] + " AND Password =" + quotes + str(request.form['oldpassword']) + quotes
+                cur.execute(sqltemp)
+                message = "successfully Changed password for Driver with id: " + str(request.form['Drive_id'])
+                print(message)
+        except Exception as e:
+            print(e)
+            con.rollback()
+            message = "error in operation"  # + str(Customer_id)
+
+        finally:
+            con.close()
+            return render_template("results.html", msg=message)
+    else:
+        try:
+            print(request.form)
+            with sql.connect('RideShare.db') as con:
+                print('entered')
+                cur = con.cursor()
+                print(request)
+        except Exception as e:
+            print(e)
+            con.rollback()
+            message = "error in operation"  # + str(Customer_id)
+
+        finally:
+            con.close()
+            return render_template("driverupdate.html")
+
+@app.route('/customerupdate', methods=['GET', 'POST'])
+def customerupdate():
+    error = None
+    print(request.method)
+    if request.method == 'POST':
+        try:
+            with sql.connect('RideShare.db') as con:
+                print('entered')
+                cur = con.cursor()
+                quotes = '"'
+                sqltemp = "UPDATE Customer SET Password =" + quotes + str(request.form['newpassword']) + quotes + "WHERE Customer_id =" + request.form['Customer_id'] + " AND Password =" + quotes + str(request.form['oldpassword']) + quotes
+                cur.execute(sqltemp)
+                message = "successfully Changed password for Customer with id: " + str(request.form['Customer_id'])
+                print(message)
+        except Exception as e:
+            print(e)
+            con.rollback()
+            message = "error in operation"  # + str(Customer_id)
+
+        finally:
+            con.close()
+            return render_template("results.html", msg=message)
+    else:
+        try:
+            print(request.form)
+            with sql.connect('RideShare.db') as con:
+                print('entered')
+                cur = con.cursor()
+                print(request)
+        except Exception as e:
+            print(e)
+            con.rollback()
+            message = "error in operation"  # + str(Customer_id)
+
+        finally:
+            con.close()
+            return render_template("customerupdate.html")
 
 if __name__ == '__main__':
     app.run(debug=True)

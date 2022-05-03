@@ -1,7 +1,8 @@
 <html>
     <body>
-        <p><a href="{{ url_for('login') }}">Already a Customer? </a></p>
-        <p><a href="{{ url_for('adddriver') }}">Are you a Driver? </a></p>
+        <p><a href="{{ url_for('login') }}">Deactivate Customer Account? </a></p>
+        <p><a href="{{ url_for('adddriver') }}">Driver Account? </a></p>
+        <p><a href="{{ url_for('customerupdate') }}">Change Customer Password? </a></p>
     <div>
         <form action = "{{ url_for('addrec')}}" method="POST">
             <h1> New Customer Information </h1>

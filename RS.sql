@@ -1,40 +1,59 @@
-CREATE TABLE "Booking" (
-	"Book_id"	INTEGER NOT NULL,
-	"Amount"	INTEGER NOT NULL,
-	"Pay_type"	TEXT NOT NULL,
-	"Booking_date"	TEXT NOT NULL,
-	"Drive_id"	INTEGER NOT NULL,
-	PRIMARY KEY("Book_id")
-);
-CREATE TABLE "Customer" (
-	"Customer_id"	INTEGER NOT NULL,
-	"Cur_address"	TEXT NOT NULL,
-	"Name"	TEXT NOT NULL,
-	"Phone_number"	INTEGER NOT NULL,
-	"Password"	TEXT NOT NULL,
-	PRIMARY KEY("Customer_id")
-);
-CREATE TABLE "Driver" (
-	"Drive_id"	INTEGER NOT NULL,
-	"Name"	TEXT NOT NULL,
-	"Birthday" TEXT,
-	"Phone_number"	INTEGER NOT NULL,
-	"Password"	TEXT NOT NULL,
-	"Car_id"	INTEGER NOT NULL,
-	PRIMARY KEY("Drive_id")
-);
-CREATE TABLE "Trip" (
-	"Trip_id"	INTEGER NOT NULL,
-	"Destination"	TEXT NOT NULL,
-	"Duration"	INTEGER NOT NULL,
-	"Arrival_time"	TEXT NOT NULL,
-	"Booking_id"	INTEGER NOT NULL,
-	PRIMARY KEY("Trip_id")
-);
-CREATE TABLE "Vehicle" (
-	"Car_id"	INTEGER NOT NULL,
-	"registration_#"	INTEGER NOT NULL,
-	"type"	TEXT NOT NULL,
-	PRIMARY KEY("Car_id")
-);
+--CREATE TABLE "Booking" (
+--	"Book_id"	INTEGER NOT NULL,
+--	"Amount"	INTEGER NOT NULL,
+--	"Pay_type"	TEXT NOT NULL,
+--	"Booking_date"	TEXT NOT NULL,
+--	"Drive_id"	INTEGER NOT NULL,
+--	PRIMARY KEY("Book_id")
+--);
+--CREATE TABLE "Customer" (
+--	"Customer_id"	INTEGER NOT NULL,
+--	"Cur_address"	TEXT NOT NULL,
+--	"Name"	TEXT NOT NULL,
+--	"Phone_number"	INTEGER NOT NULL,
+--	"Password"	TEXT NOT NULL,
+--	PRIMARY KEY("Customer_id")
+--);
+--CREATE TABLE "Driver" (
+--	"Drive_id"	INTEGER NOT NULL,
+--	"Name"	TEXT NOT NULL,
+--	"Birthday" TEXT,
+--	"Phone_number"	INTEGER NOT NULL,
+--	"Password"	TEXT NOT NULL,
+--	"Car_id"	INTEGER NOT NULL,
+--	PRIMARY KEY("Drive_id")
+--);
+--CREATE TABLE "Trip" (
+--	"Trip_id"	INTEGER NOT NULL,
+--	"Destination"	TEXT NOT NULL,
+--	"Duration"	INTEGER NOT NULL,
+--	"Arrival_time"	TEXT NOT NULL,
+--	"Booking_id"	INTEGER NOT NULL,
+--	PRIMARY KEY("Trip_id")
+--);
+--CREATE TABLE "Vehicle" (
+--	"Car_id"	INTEGER NOT NULL,
+--	"registration_#"	INTEGER NOT NULL,
+--	"type"	TEXT NOT NULL,
+--	PRIMARY KEY("Car_id")
+--);
+--
 
+SHOW TABLE
+--create or replace PROCEDURE avgTimeTrip AS
+--CURSOR DrivDura IS SELECT d.Drive_id,AVG(t.duration) as temp FROM Trip t left join Booking b on t.Booking_id = b.book_id left join Driver d on d.Drive_id = b.Drive_id GROUP BY d.Drive_id;
+--thisDur DrivDura%ROWTYPE;
+--
+--BEGIN
+--OPEN DrivDura;
+--LOOP
+--  FETCH DrivDura INTO avg_time;
+--  EXIT WHEN (DrivDura%NOTFOUND);
+--  dbms_output.put_line(avg_time.temp || ' is the Average duration for each driver:' || avg_time.Drive_id);
+--END LOOP;
+--CLOSE DrivDura;
+--END;
+--
+--begin
+--avgTimeTrip;
+--end;
