@@ -62,6 +62,13 @@ def login():
 def new_driver():
     return render_template('driver.html')
 
+# remove driver method
+@app.route('/adddriver', methods=['POST', 'GET'])
+def removedriver():
+    print(request.method)
+
+
+
 @app.route('/adddriver', methods=['POST', 'GET'])
 def adddriver():
     print(request.method)
@@ -111,6 +118,7 @@ def driverlogin():
         else:
             return redirect(url_for('home'))
     return render_template('driverlogin.html', error=error)
+
 
 
 if __name__ == '__main__':

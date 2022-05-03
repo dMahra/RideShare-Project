@@ -37,3 +37,4 @@ CREATE TABLE "Vehicle" (
 	"type"	TEXT NOT NULL,
 	PRIMARY KEY("Car_id")
 );
+
