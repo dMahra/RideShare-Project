@@ -23,6 +23,7 @@ def addrec():
             # print(Name, Address, Phone_Number, Password)
 
             with sql.connect('RideShare.db') as con:
+                con.execute("PRAGMA read_uncommitted = true;");
                 print('entered')
                 cur = con.cursor()
                 # prepared statement for 'Customer' table insertion
@@ -32,7 +33,7 @@ def addrec():
                 #             (Name, Address, str(Phone_Number), Password))
                 con.commit()
                 quotes = '"'
-                sqltemp="SELECT Customer_id from Customer WHERE Name =" +quotes+ str(Name)+ quotes + \
+                sqltemp = "SELECT Customer_id from Customer WHERE Name =" +quotes+ str(Name)+ quotes + \
                         "and Cur_address =" +quotes+ str(Address)+ quotes + "and Password =" +quotes+ str(Password)+ quotes+ \
                         "and Phone_number =" +Phone_Number
                 cur.execute(sqltemp)
@@ -56,6 +57,7 @@ def login():
             # print(request.form['Customer_id'])
 
             with sql.connect('RideShare.db') as con:
+                con.execute("PRAGMA read_uncommitted = true;");
                 cur = con.cursor()
                 quotes = '"'
                 sqltemp = "DELETE from Customer WHERE Password =" + quotes + str(request.form['password']) + quotes + "and Customer_id =" + request.form['Customer_id']
@@ -75,6 +77,7 @@ def login():
         try:
             print(request.form)
             with sql.connect('RideShare.db') as con:
+                con.execute("PRAGMA read_uncommitted = true;");
                 print('entered')
                 cur = con.cursor()
                 print(request)
@@ -109,6 +112,7 @@ def adddriver():
                         "Car_id": Car_id}
 
             with sql.connect('RideShare.db') as con:
+                con.execute("PRAGMA read_uncommitted = true;");
                 print('entered')
                 cur = con.cursor()
                 # prepared statement for 'Driver' table insertion
@@ -143,6 +147,7 @@ def driverlogin():
             # print(request.form['Customer_id'])
 
             with sql.connect('RideShare.db') as con:
+                con.execute("PRAGMA read_uncommitted = true;");
                 print('entered')
                 cur = con.cursor()
                 quotes = '"'
@@ -162,6 +167,8 @@ def driverlogin():
         try:
             print(request.form)
             with sql.connect('RideShare.db') as con:
+                con.execute("PRAGMA read_uncommitted = true;");
+
                 print('entered')
                 cur = con.cursor()
                 print(request)
@@ -181,6 +188,7 @@ def driverupdate():
     if request.method == 'POST':
         try:
             with sql.connect('RideShare.db') as con:
+                con.execute("PRAGMA read_uncommitted = true;");
                 print('entered')
                 cur = con.cursor()
                 quotes = '"'
@@ -200,6 +208,7 @@ def driverupdate():
         try:
             print(request.form)
             with sql.connect('RideShare.db') as con:
+                con.execute("PRAGMA read_uncommitted = true;");
                 print('entered')
                 cur = con.cursor()
                 print(request)
@@ -219,6 +228,7 @@ def customerupdate():
     if request.method == 'POST':
         try:
             with sql.connect('RideShare.db') as con:
+                con.execute("PRAGMA read_uncommitted = true;");
                 print('entered')
                 cur = con.cursor()
                 quotes = '"'
@@ -238,6 +248,7 @@ def customerupdate():
         try:
             print(request.form)
             with sql.connect('RideShare.db') as con:
+                con.execute("PRAGMA read_uncommitted = true;");
                 print('entered')
                 cur = con.cursor()
                 print(request)
