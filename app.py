@@ -1,5 +1,10 @@
+from os import abort
+
 from flask import Flask, render_template, request, redirect, url_for
 import sqlite3 as sql
+
+from models import db, Vehicles
+# from WebApp.models import Vehicles
 
 app = Flask(__name__, template_folder='templates')
 
@@ -260,6 +265,66 @@ def customerupdate():
         finally:
             con.close()
             return render_template("customerupdate.html")
+
+
+@app.route('/vehicle/create', methods=['GET', 'POST'])
+def create():
+    if request.method == 'GET':
+        return render_template('registerVehicle.html')
+
+    if request.method == 'POST':
+        vehicle_id = request.form['vehicle_id']
+        state = request.form['state']
+        licensePlateNumber = request.form['licensePlateNumber']
+        make = request.form['make']
+        vehicle = Vehicles(vehicle_id=vehicle_id, state=state, licensePlateNumber=licensePlateNumber, make=make)
+        db.session.add(vehicle)
+        db.session.commit()
+        return redirect('/vehicle')
+
+@app.route('/vehicle')
+def RetrieveList():
+    vehicles = Vehicles.query.all()
+    return render_template('vehicleList.html',vehicles = vehicles)
+
+@app.route('/vehicle/<int:id>')
+def RetrieveVehicle(id):
+    vehicle = Vehicles.query.filter_by(vehicle_id=id).first()
+    if vehicle:
+        return render_template('vehicle.html', vehicle = vehicle)
+    return "Vehicle with id: " + str(id) + "Doesn't exist"
+
+
+@app.route('/vehicle/<int:id>/update', methods=['GET', 'POST'])
+def update(id):
+    vehicle = Vehicles.query.filter_by(vehicle_id=id).first()
+    if request.method == 'POST':
+        if vehicle:
+            db.session.delete(vehicle)
+            db.session.commit()
+            state = request.form['state']
+            licensePlateNumber = request.form['licensePlateNumber']
+            make = request.form['make']
+            vehicle = Vehicles(vehicle_id=id, state=state, licensePlateNumber=licensePlateNumber, make=make)
+            db.session.add(vehicle)
+            db.session.commit()
+            return redirect('/vehicle/' + str(id))
+        return "Vehicle with id: " + str(id) + "Doesn't exist"
+
+    return render_template('vehicleUpdate.html', vehicle=vehicle)
+
+
+@app.route('/vehicle/<int:id>/delete', methods=['GET', 'POST'])
+def delete(id):
+    vehicle = Vehicles.query.filter_by(vehicle_id=id).first()
+    if request.method == 'POST':
+        if vehicle:
+            db.session.delete(vehicle)
+            db.session.commit()
+            return redirect('/vehicle')
+        abort(404)
+
+    return render_template('vehicleDelete.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
